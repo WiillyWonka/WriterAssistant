@@ -10,6 +10,9 @@ class Settings(BaseSettings):
 
     anthropic_api_key: str = ""
     anthropic_model: str = "claude-sonnet-4-20250514"
+    openai_api_key: str = ""
+    openai_model: str = "gpt-4o"
+    llm_provider: str = "anthropic"
     cors_origins: str = "http://localhost:3000"
 
     @property
