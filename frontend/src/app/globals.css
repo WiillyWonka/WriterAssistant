@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0f1419;
+  --foreground: #e7e9ea;
+  --panel: #16181c;
+  --border: #2f3336;
+  --accent: #1d9bf0;
+  --muted: #71767b;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+.markdown-preview {
+  color: var(--foreground);
+}
+
+.markdown-preview a {
+  color: var(--accent);
+}
+
+.markdown-preview pre {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  overflow-x: auto;
+}
+
+.markdown-preview code {
+  font-size: 0.9em;
+}

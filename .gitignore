@@ -1,0 +1,23 @@
+# Env (корень — для Docker Compose)
+.env
+
+# Python
+backend/.venv/
+backend/__pycache__/
+**/__pycache__/
+*.py[cod]
+backend/.env
+
+# Node
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.env
+frontend/.env.local
+frontend/.env*.local
+
+# OS / IDE
+.DS_Store
+*.swp
+.idea/
+.vscode/
