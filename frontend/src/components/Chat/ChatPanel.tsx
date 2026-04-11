@@ -29,8 +29,8 @@ export function ChatPanel() {
             }
             className="max-w-[11rem] rounded-lg border border-[var(--border)] bg-[var(--panel)] px-2 py-1 text-xs text-[var(--foreground)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)]"
           >
-            <option value="anthropic">Claude</option>
             <option value="openai">ChatGPT</option>
+            <option value="anthropic">Claude</option>
           </select>
         </label>
       </div>

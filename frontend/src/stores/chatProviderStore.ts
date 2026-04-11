@@ -8,6 +8,6 @@ type ChatProviderState = {
 };
 
 export const useChatProviderStore = create<ChatProviderState>((set) => ({
-  provider: "anthropic",
+  provider: "openai",
   setProvider: (provider) => set({ provider }),
 }));

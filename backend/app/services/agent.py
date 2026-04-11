@@ -53,7 +53,7 @@ def openai_messages_from_request(messages: list[dict]) -> list[dict]:
 
 
 def normalize_provider(provider: str | None) -> str:
-    raw = (provider or settings.llm_provider or "anthropic").strip().lower()
+    raw = (provider or settings.llm_provider or "openai").strip().lower()
     if raw in ("claude", "anthropic"):
         return "anthropic"
     if raw in ("openai", "chatgpt", "gpt"):
