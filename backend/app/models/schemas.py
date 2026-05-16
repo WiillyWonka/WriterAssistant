@@ -25,6 +25,7 @@ class ChatRequest(BaseModel):
 
     messages: list[dict[str, Any]] = Field(default_factory=list)
     document_content: str = ""
+    document_id: str = Field(..., min_length=1)
     id: Optional[str] = None
     provider: Optional[str] = None
     model: Optional[str] = None

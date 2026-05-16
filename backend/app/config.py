@@ -15,6 +15,15 @@ class Settings(BaseSettings):
     llm_provider: str = "openai"
     cors_origins: str = "http://localhost:3000"
 
+    database_url: str = (
+        "postgresql+asyncpg://postgres:postgres@localhost:5432/writer_assistant"
+    )
+    keycloak_issuer: str = "http://localhost:8080/realms/writer-assistant"
+    keycloak_jwks_url: str = (
+        "http://localhost:8080/realms/writer-assistant/protocol/openid-connect/certs"
+    )
+    keycloak_audience: str = "writer-assistant-api"
+
     @property
     def cors_origin_list(self) -> list[str]:
         return [o.strip() for o in self.cors_origins.split(",") if o.strip()]

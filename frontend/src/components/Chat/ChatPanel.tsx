@@ -1,5 +1,7 @@
 "use client";
 
+import type { UIMessage } from "ai";
+
 import { ChatInput } from "@/components/Chat/ChatInput";
 import { MessageList } from "@/components/Chat/MessageList";
 import { useWriterChat } from "@/hooks/useWriterChat";
@@ -8,9 +10,14 @@ import {
   useChatProviderStore,
 } from "@/stores/chatProviderStore";
 
-export function ChatPanel() {
+type Props = {
+  accessToken: string;
+  initialMessages: UIMessage[];
+};
+
+export function ChatPanel({ accessToken, initialMessages }: Props) {
   const { messages, sendMessage, status, stop, error, clearError } =
-    useWriterChat();
+    useWriterChat({ accessToken, initialMessages });
   const provider = useChatProviderStore((s) => s.provider);
   const setProvider = useChatProviderStore((s) => s.setProvider);
 
