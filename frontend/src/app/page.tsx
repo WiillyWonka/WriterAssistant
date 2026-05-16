@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { SplitLayout } from "@/components/Layout/SplitLayout";
-import { initKeycloak, isAuthenticated, login, logout, getUsername } from "@/lib/keycloak";
+import { initKeycloak, login, logout, getUsername, keycloak } from "@/lib/keycloak";
 
 export default function Home() {
   const [initialized, setInitialized] = useState(false);

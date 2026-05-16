@@ -1,31 +1,38 @@
-```
+```gitignore
 # Dependencies
 node_modules/
-venv/
-.venv/
-__pycache__/
-.mypy_cache/
-.pytest_cache/
-*.egg-info/
+
+# Build outputs
 dist/
 build/
-target/
-.gradle/
+.next/
+out/
 
-# Environment
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+.ENV
+.python-version
+
+# Logs
+*.log
+
+# Environment variables
 .env
 .env.local
-*.env.*
+.env.*
 
-# Editors
+# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
-*.tmp
-
-# Logs
-*.log
 
 # OS
 .DS_Store
@@ -36,23 +43,41 @@ coverage/
 htmlcov/
 .coverage
 
-# Compressed files
-*.zip
-*.gz
-*.tar
-*.tgz
-*.bz2
-*.xz
-*.7z
-*.rar
-*.zst
-*.lz4
-*.lzh
-*.cab
-*.arj
-*.rpm
-*.deb
-*.Z
-*.lz
-*.lzo
+# Temporary files
+*.tmp
+*.temp
+```
+
+Wait, let me reconsider this. The only modified file is `frontend/src/app/page.tsx`, which is a TypeScript React component. Looking at the original content, I see it's mostly standard web development patterns, but since the change list shows only a frontend source file modification without any build artifacts or dependency changes, I should reconsider what actually needs to be in the .gitignore.
+
+Actually, given that only a frontend source file was modified and no build artifacts or dependencies were mentioned in the changes, the optimal approach would be to include standard web development ignores that are commonly needed for such projects:
+
+```gitignore
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.local
+.env.*
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
 ```
