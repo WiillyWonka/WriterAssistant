@@ -14,6 +14,12 @@ class Settings(BaseSettings):
     openai_model: str = "gpt-4o"
     llm_provider: str = "openai"
     cors_origins: str = "http://localhost:3000"
+    
+    # Keycloak settings
+    keycloak_server_url: str = "http://localhost:8080"
+    keycloak_realm: str = "writer-assistant"
+    keycloak_client_id: str = "writer-assistant-backend"
+    keycloak_client_secret: str = ""
 
     @property
     def cors_origin_list(self) -> list[str]:

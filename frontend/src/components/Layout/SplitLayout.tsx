@@ -10,23 +10,43 @@ import { ChatPanel } from "@/components/Chat/ChatPanel";
 import { EditorSection } from "@/components/Editor/EditorSection";
 import { useEditorStore } from "@/stores/editorStore";
 
-export function SplitLayout() {
+interface SplitLayoutProps {
+  onLogout?: () => void;
+  username?: string | null;
+}
+
+export function SplitLayout({ onLogout, username }: SplitLayoutProps) {
   const title = useEditorStore((s) => s.title);
   const setTitle = useEditorStore((s) => s.setTitle);
 
   return (
     <div className="flex h-screen flex-col">
-      <header className="flex shrink-0 items-center gap-4 border-b border-[var(--border)] px-4 py-3">
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="min-w-0 flex-1 border-none bg-transparent text-lg font-semibold text-[var(--foreground)] outline-none placeholder:text-[var(--muted)]"
-          placeholder="Название документа"
-        />
-        <span className="hidden text-xs text-[var(--muted)] sm:inline">
-          Writer Assistant
-        </span>
+      <header className="flex shrink-0 items-center justify-between border-b border-[var(--border)] px-4 py-3">
+        <div className="flex items-center gap-4 flex-1">
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="min-w-0 flex-1 border-none bg-transparent text-lg font-semibold text-[var(--foreground)] outline-none placeholder:text-[var(--muted)]"
+            placeholder="Название документа"
+          />
+        </div>
+        <div className="flex items-center gap-4 shrink-0">
+          {username && (
+            <span className="text-sm text-[var(--muted)]">
+              {username}
+            </span>
+          )}
+          <button
+            onClick={onLogout}
+            className="px-4 py-2 text-sm text-red-600 hover:text-red-700 transition-colors"
+          >
+            Выйти
+          </button>
+          <span className="hidden text-xs text-[var(--muted)] sm:inline">
+            Writer Assistant
+          </span>
+        </div>
       </header>
 
       <PanelGroup
