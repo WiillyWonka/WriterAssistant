@@ -23,7 +23,7 @@ export function useWriterChat() {
               Authorization: `Bearer ${token}`,
             };
           }
-          return {};
+          return { Authorization: "" };
         },
         prepareSendMessagesRequest: ({ id, messages, body }) => ({
           body: {
