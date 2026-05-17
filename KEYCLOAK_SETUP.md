@@ -110,6 +110,39 @@ NEXT_PUBLIC_KEYCLOAK_REALM=writer-assistant
 NEXT_PUBLIC_KEYCLOAK_CLIENT_ID=writer-assistant-frontend
 ```
 
+### Настройка для развёртывания на сервере
+
+Все URL формируются автоматически из переменной `SERVER_IP` в файле `.env` в корне проекта:
+
+```env
+SERVER_IP=203.0.113.50
+# или домен
+SERVER_IP=example.com
+```
+
+После установки `SERVER_IP` следующие переменные будут сформированы автоматически:
+- `CORS_ORIGINS=http://${SERVER_IP}:3000`
+- `NEXT_PUBLIC_API_URL=http://${SERVER_IP}:8000`
+- `NEXT_PUBLIC_KEYCLOAK_URL=http://${SERVER_IP}:8080`
+
+**Важно:** После изменения `SERVER_IP` необходимо пересобрать контейнеры:
+
+```bash
+docker compose down
+docker compose up --build -d
+```
+
+### Настройка Keycloak для удалённого доступа
+
+При настройке клиентов в Keycloak укажите актуальные URL с вашим IP/доменом:
+
+**Frontend клиент:**
+- Valid redirect URIs: `http://${SERVER_IP}:3000/*`
+- Valid post logout redirect URIs: `http://${SERVER_IP}:3000/*`
+- Web origins: `http://${SERVER_IP}:3000`
+
+Замените `${SERVER_IP}` на ваш фактический IP или домен.
+
 ## Как это работает
 
 ### Backend защита:

@@ -26,7 +26,7 @@ services:
       LLM_PROVIDER: ${LLM_PROVIDER:-openai}
       CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000}
       KEYCLOAK_SERVER_URL: http://keycloak:8080
-      KEYCLOAK_REALM: writer-assistant
+      KEYCLOAK_REALM: ${NEXT_PUBLIC_KEYCLOAK_REALM:-writer-assistant}
       KEYCLOAK_CLIENT_ID: writer-assistant-backend
       KEYCLOAK_CLIENT_SECRET: backend-secret
     depends_on:
