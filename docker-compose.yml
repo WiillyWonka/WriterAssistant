@@ -1,4 +1,17 @@
 services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0
+    container_name: keycloak
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_HTTP_PORT: 8080
+    command: start-dev
+    ports:
+      - "8080:8080"
+    volumes:
+      - keycloak_data:/opt/keycloak/data
+
   backend:
     build:
       context: ./backend
@@ -12,6 +25,12 @@ services:
       OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o}
       LLM_PROVIDER: ${LLM_PROVIDER:-openai}
       CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000}
+      KEYCLOAK_SERVER_URL: http://keycloak:8080
+      KEYCLOAK_REALM: writer-assistant
+      KEYCLOAK_CLIENT_ID: writer-assistant-backend
+      KEYCLOAK_CLIENT_SECRET: backend-secret
+    depends_on:
+      - keycloak
 
   frontend:
     build:
@@ -19,7 +38,14 @@ services:
       dockerfile: Dockerfile
       args:
         NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+        NEXT_PUBLIC_KEYCLOAK_URL: ${NEXT_PUBLIC_KEYCLOAK_URL:-http://localhost:8080}
+        NEXT_PUBLIC_KEYCLOAK_REALM: ${NEXT_PUBLIC_KEYCLOAK_REALM:-writer-assistant}
+        NEXT_PUBLIC_KEYCLOAK_CLIENT_ID: ${NEXT_PUBLIC_KEYCLOAK_CLIENT_ID:-writer-assistant-frontend}
     ports:
       - "3000:3000"
     depends_on:
       - backend
+      - keycloak
+
+volumes:
+  keycloak_data:

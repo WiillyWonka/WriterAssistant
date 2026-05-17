@@ -1,10 +1,11 @@
 from collections.abc import AsyncIterator
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from fastapi.responses import StreamingResponse
 
 from app.models.schemas import ChatRequest
 from app.services.agent import stream_writer_reply
+from app.security import get_current_user
 
 router = APIRouter()
 
@@ -24,7 +25,10 @@ async def text_stream(body: ChatRequest) -> AsyncIterator[bytes]:
 
 
 @router.post("/chat")
-async def chat(body: ChatRequest) -> StreamingResponse:
+async def chat(
+    body: ChatRequest,
+    current_user: dict = Depends(get_current_user),
+) -> StreamingResponse:
     return StreamingResponse(
         text_stream(body),
         media_type="text/plain; charset=utf-8",
