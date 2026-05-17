@@ -6,6 +6,7 @@ import { useMemo } from "react";
 
 import { useChatProviderStore } from "@/stores/chatProviderStore";
 import { useEditorStore } from "@/stores/editorStore";
+import { getToken, isAuthenticated } from "@/lib/keycloak";
 
 const apiBase = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
@@ -15,6 +16,15 @@ export function useWriterChat() {
       new TextStreamChatTransport({
         api: `${apiBase}/api/chat`,
         credentials: "omit",
+        headers: () => {
+          if (isAuthenticated()) {
+            const token = getToken();
+            return {
+              Authorization: `Bearer ${token}`,
+            };
+          }
+          return { Authorization: "" };
+        },
         prepareSendMessagesRequest: ({ id, messages, body }) => ({
           body: {
             ...body,
